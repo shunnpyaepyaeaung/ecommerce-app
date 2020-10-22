@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css2?family=Romanesco&display=swap" rel="stylesheet"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet"> 
+  <style>
+  .land{
+    color: red;
+    /* font-family: 'Courgette', cursive; */
+    font-family: 'Satisfy', cursive;
+      }
+  .navbar {
+    position: relative;
+}
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    margin-left: -50px !important;  /* 50% of your logo width */
+    display: block;
+    font-family: 'Satisfy', cursive;
+    font-size:4em;
+    color: black !important;
+    margin-top: 100px;
+}
+
+svg{
+  margin-right: 5px;
+}
+.signIn{
+  padding-right: 10px;
+ 
+}
+.menu-area{
+  position: absolute;
+  left: 42%;
+  right: 50%;
+  transform: translate(-50%,-50%);
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(255,255,255,0.5);
+  display: inline-block;
+  /* margin: 20px; */
+  margin-top: 40px;
+}
+.menu-area a:hover::before{
+  width: 100%;
+}
+.menu-area a:before{
+  content: "";
+  border-bottom: 3px solid salmon;
+  color: #ffffff;
+  white-space: nowrap;
+  width: 0%;
+  overflow: hidden;
+  padding: 10px 0;
+  transition: .3s;
+  position: absolute;
+  left: 0;
+  /* top: -2px; */
+
+}
+
+.menu-area a{
+  position: relative;
+  text-decoration: none;
+  padding-top: 10px 0;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.navbar-collapse{
+  color: black !important;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+}
+.navbar-bottom{
+  margin-top: 70px;
+}
+#name{
+  padding-left: 30px;
+  display: flex;
+}
+ 
+</style>
+<body>
+  <div class="navbar-top">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand" href="#">Course<span class="land">Land</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <div class="ui category search">
+              <div class="ui icon input">
+                <input class="prompt" type="text" placeholder="Search item...">
+                <i class="search icon"></i>
+              </div>
+              <div class="results"></div>
+            </div>            
+          </li>
+          <li>
+            <% if(current_user_id){ %>
+              <div id="name">
+                Username :<h5><%= current_user_name %></h5>
+              </div>
+  
+          <%  } %>
+            </li>
+        </ul>
+        
+        <span class="navbar-text">
+          <ul class="nav navbar-nav pull-right" style="padding:9px;">
+              
+            <svg width="1.5em" height="1.3em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M10 5a2 2 0 1 1-4 0 2 2 0 0 1 4 0zM8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm6 5c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+            </svg> 
+            <% if(current_user_id){ %>
+                <a href="/logout" class="signOut">Sign Out</a>
+              <% } else{ %>
+                <a href="/login" class="signIn">Sign In</a>
+              <% } %>
+
+            <svg width="1.5em" height="1.2em" viewBox="0 0 16 16" class="bi bi-bag" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M8 1a2.5 2.5 0 0 0-2.5 2.5V4h5v-.5A2.5 2.5 0 0 0 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5zM2 5v9a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V5H2z"/>
+            </svg><a href="/addtocart" class="bag">Shopping Bag</a>
+          </ul>
+        </span>
+      </div>
+    </nav>
+  </div>
+
+  <div class="navbar-bottom container">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      
+      <div class="collapse navbar-collapse menu-area" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a href="/product?category=Development>" class="nav-link" data-text="Development" href="#">Development</a>
+          </li>
+          <li class="nav-item">
+            <a href="/product?category=Business" class="nav-link" data-text="Business" href="#">Business</a>
+          </li>
+          <li class="nav-item">
+            <a href="/product?category=Software" class="nav-link" data-text="Software" href="#">Software</a>
+          </li>
+          <li class="nav-item">
+            <a href="/product?category=Design" class="nav-link" data-text="Design" href="#">Design</a>
+          </li>
+          <li class="nav-item">
+            <a href="/product?category=Networking" class="nav-link" data-text="Networking" href="#">Networking</a>
+          </li>
+          <li class="nav-item">
+            <a href="/product?category=Music" class="nav-link" data-text="Music" href="#">Music</a>
+          </li>
+         
+        </ul>
+      </div>
+    </nav>
+  </div>
+  <hr>
+  
+
+  
+</body>
+<script>
+  $(`.prompt`).keydown(function(e){
+    if(e.keyCode==13){
+      var keyword = $(`.prompt`).val();
+      window.location.href = `/search?pname=${keyword}`;
+    }
+  })
+</script>
+</html>

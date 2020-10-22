@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <title>Update Product</title>
+</head>
+<body>
+    <div class="container">
+        
+        <form method="GET" action="/update">
+            
+            <div class="form-group">
+                <label for="exampleInputProductName" class="col-md-6">Product Name</label>
+                <input name="pname" type="text" class="form-control col-md-6" id="exampleInputProductName" value="<%= data[0].pname %>">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputAuthor" class="col-md-6">Author</label>
+                <input name="author" type="text" class="form-control col-md-6" id="exampleInputAuthor" value="<%= data[0].author %>">
+              </div>
+            <div class="form-group">
+              <label for="exampleInputPrice" class="col-md-6">Price</label>
+              <input name="price" type="text" class="form-control col-md-6" id="exampleInputPrice" value="<%= data[0].price %>">
+            </div>
+            <div class="form-group">
+              <label for="exampleInputDescription" class="col-md-6">Description</label>
+              <input name="description" type="text" class="form-control col-md-6" id="exampleInputDescription" value="<%= data[0].description %>">
+            </div>
+            <div class="form-group">
+                <label for="exampleInputCategory" class="col-md-6">Category</label>
+                <input name="category" type="text" class="form-control col-md-6" id="exampleInputCategory" value="<%= data[0].category %>">
+              </div>
+              <div class="form-group">
+                <label for="exampleInputFile" class="col-md-6">Choose Image</label>
+                <input name="filename" type="file" class="form-control col-md-6" id="exampleInputFile" >
+              </div>
+              <input name="pid" value="<%= data[0].pid %>" style="display: none;">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+    </div>
+    
+</body>
+</html>

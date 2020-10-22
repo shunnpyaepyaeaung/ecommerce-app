@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <title>Add to cart</title>
+</head>
+<style>
+    body {
+	margin-top: 20px;
+    
+}
+
+</style>
+<body>
+    <div class="container">
+        <%- include ('./index.ejs') %>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-10 col-md-offset-1">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th class="text-center">Price</th>
+                            <th class="text-center">Total</th>
+                            <th> </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <% data.forEach((e,i)=>{ %>                               
+                          <tr>
+                            <td class="col-sm-8 col-md-6">
+                            <div class="media">
+                                <a class="thumbnail pull-left" href="#"> <img class="media-object" src="images/<%= e.filename %>" style="width: 92px; height: 72px;"> </a>
+                                <div class="media-body">
+                                    <h4 class="media-heading"><a href="#"><%= e.pname %></a></h4>
+                                    <h5 class="media-heading"> by <a href="#"><%= e.author %></a></h5>
+                                </div>
+                            </div></td>
+                            <td class="col-sm-1 col-md-1" style="text-align: center">
+                            <input type="number" class="form-control quantityinput" id="quantity<%= i %>" min="1" value="<%= e.quantity %>">
+                            </td>
+                            <td class="col-sm-1 col-md-1 text-center strongprice" id="price"><%= e.price %></td>
+                            <td class="col-sm-1 col-md-1 text-center total" id="total<%= i %>"><%= e.price * e.quantity%></td>
+                            <td class="col-sm-1 col-md-1">
+                            <input id="pid" name="pid" value="<%= data[0].pid %>" style="display: none;">
+
+                                
+                            <a href="/removecart?pid=<%= e.pid %>" class="btn btn-danger rounded-pill">
+                                <span class="glyphicon glyphicon-remove"></span> Remove
+                            </a></td>
+                        </tr>
+                        <% })%>
+                    
+                       
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td><h3>Total</h3></td>
+                            <td class="text-right"><h3><strong id="subtotal"></strong></h3></td>
+                        </tr>
+                        <tr>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>   </td>
+                            <td>
+                            <a href="/product" type="button" class="btn btn-default">
+                                <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
+                            </a></td>
+                            <td>
+                            <button type="button" class="btn btn-success rounded-pill">
+                                Checkout <span class="glyphicon glyphicon-play"></span>
+                            </button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+
+    totalValue()
+    var initialValue =[];
+    $(`.strongprice`).each((i,e)=>{
+        let price = parseFloat($(e).text());
+        initialValue.push(price);
+    })
+
+    $(`.quantityinput`).each((i,e)=>{
+        $(e).on('change',function(){
+            let quantity = parseInt($(e).val());
+            let multiplyValue = `${quantity * initialValue[i]}`;
+            $(`#total${i}`).html(Math.floor(multiplyValue))
+            totalValue()
+        })
+    })
+
+    function totalValue(){
+        var sum = 0;
+        $(`.total`).each((i,e)=>{
+            let total = parseFloat($(e).text());
+            sum+= total;
+            $(`#subtotal`).text(Math.floor(sum))
+        })
+    }
+
+</script>
+</html>
